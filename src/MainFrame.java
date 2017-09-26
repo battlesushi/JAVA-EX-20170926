@@ -13,7 +13,7 @@ public class MainFrame extends Frame {
     private Label lab = new Label("@_@");
     private Timer t1;
     private boolean flag=true;
-    private int labx = 50, laby = 50;
+    private int labx = 50, laby = 50,colorR=255,colorG=255,colorB=255;
     public MainFrame() {
         init();
     }
@@ -35,6 +35,7 @@ public class MainFrame extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 t1.start();
+                flag=true;
             }
         });
 
@@ -64,19 +65,23 @@ public class MainFrame extends Frame {
                 t1.stop();
             }
         });
+
         t1 = new Timer(50, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
                 if(flag){
                     labx+=5;
                     lab.setLocation(labx, laby);
+                    colorB-=0.1; colorG-=0.1;  colorB-=0.1;
+                    lab.setForeground(new Color(colorR,colorG,colorB));
                     if(labx>MainFrame.this.getWidth()){
                         flag=false;
                     }
                 }
                 else if(!flag){
                     labx-=5;
+                    colorB+=0.1; colorG+=0.1;  colorB+=0.1;
+                    lab.setForeground(new Color(colorR,colorG,colorB));
                     lab.setLocation(labx, laby);
                     if(labx<0){
                         flag=true;
